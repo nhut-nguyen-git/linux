@@ -1,0 +1,12 @@
+## Explanation
+- **Producer:**
+  - Locks the mutex before modifying `data`.
+  - Generates a random number (1–10) and sets `dataAvailable = 1`.
+  - Signals the **consumer** and unlocks the mutex.
+- **Consumer:**
+  - Waits (`pthread_cond_wait`) until `producer` signals data is ready.
+  - Reads the `data` and resets `dataAvailable = 0`.
+  - Unlocks the mutex to allow the next iteration.
+- **Synchronization:**
+  - `pthread_cond_wait` allows the consumer to sleep until notified.
+  - `pthread_cond_signal` wakes up the consumer when new data is available.

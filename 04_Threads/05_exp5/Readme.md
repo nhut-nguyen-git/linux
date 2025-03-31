@@ -1,0 +1,13 @@
+## Explanation
+- **Reader Threads:**
+  - Acquire **read lock (`pthread_rwlock_rdlock`)**.
+  - Print the shared `data` value.
+  - Release **read lock (`pthread_rwlock_unlock`)**.
+- **Writer Threads:**
+  - Acquire **write lock (`pthread_rwlock_wrlock`)**.
+  - Increment `data`.
+  - Release **write lock (`pthread_rwlock_unlock`)**.
+- **Synchronization Mechanism:**
+  - Multiple readers can read at the same time.
+  - Only one writer can modify data at a time.
+  - Readers cannot read while a writer is modifying `data`.
